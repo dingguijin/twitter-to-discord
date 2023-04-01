@@ -4,6 +4,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 from selenium.webdriver.chrome.service import Service as ChromeService
 import time
+import random
 import pyautogui as ag
 
 def up_down(driver):
@@ -27,7 +28,8 @@ def up_down_with_se(driver):
     for i in range(10):
         y = (i+1) * 1280
         driver.execute_script('return window.scrollTo(0, %d);' % y)
-        time.sleep(1);
+        _t = random.gauss(1.0, 3.5)
+        time.sleep(abs(_t));
 
     driver.execute_script('return window.scrollTo(0, 12);')
     e = driver.find_element(By.XPATH, "//*[@id=\"react-root\"]/div/div/div[2]/header/div/div/div/div[1]/div[2]/nav/a[1]")
