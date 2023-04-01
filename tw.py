@@ -11,8 +11,13 @@ def up_down(driver):
     ag.moveTo(w/2, h/2)
     ag.scroll(1000)
     time.sleep(2)
-    ag.scroll(-200)
-    time.sleep(2)
+    ag.scroll(-1000)
+    time.sleep(1)
+    ag.scroll(-1000)
+    time.sleep(1)
+    ag.scroll(1000)
+    ag.scroll(1000)
+    ag.scroll(1000)
     ag.scroll(1000)
     return
 
