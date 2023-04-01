@@ -24,10 +24,15 @@ def up_down(driver):
 def up_down_with_se(driver):
     driver.execute_script('return window.scrollTo(0, 12);')
     time.sleep(2);
-    driver.execute_script('return window.scrollTo(0, 1280);')
-    time.sleep(1);
+    for i in range(10):
+        y = (i+1) * 1280
+        driver.execute_script('return window.scrollTo(0, %d);' % y)
+        time.sleep(1);
 
     driver.execute_script('return window.scrollTo(0, 12);')
+    e = driver.find_element(By.XPATH, "//*[@id=\"react-root\"]/div/div/div[2]/header/div/div/div/div[1]/div[2]/nav/a[1]")
+    if e:
+        e.click()
 
     return
 
