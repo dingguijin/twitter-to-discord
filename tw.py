@@ -7,9 +7,13 @@ import time
 import pyautogui as ag
 
 def up_down(driver):
-    ag.moveTo(800, 600)
-    ag.scroll(100)
-    ag.scroll(-100)
+    w, h = ag.size()
+    ag.moveTo(w/2, h/2)
+    ag.scroll(1000)
+    time.sleep(2)
+    ag.scroll(-200)
+    time.sleep(2)
+    ag.scroll(1000)
     return
 
 def get_driver_instance():
