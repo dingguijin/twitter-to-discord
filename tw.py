@@ -35,7 +35,7 @@ def up_down_with_se(driver):
     for i in range(10):
         y = (i+1) * 1280
         scroll_with_se(driver, y)
-        _t = random.gauss(1.0, 3.5)
+        _t = random.gauss(4.0, 3.5)
         time.sleep(abs(_t));
 
     scroll_with_se(driver, 12)
@@ -44,6 +44,7 @@ def up_down_with_se(driver):
         if ele:
             ele.click()
     except Exception as e:
+        print("Exception .... ", e)
         restart()
     return
 
@@ -68,6 +69,7 @@ def get_page(driver, url):
             try:
                 up_down_with_se(driver)
             except Exception as e:
+                print("Exception .... ", e)
                 restart()
 
             continue
@@ -79,6 +81,7 @@ def get_page(driver, url):
                 time.sleep(abs(random.gauss(10.0, 8.0)))
                 up_down_with_se(driver)
             except Exception as e:
+                print("Exception .... ", e)
                 restart()
 
 
