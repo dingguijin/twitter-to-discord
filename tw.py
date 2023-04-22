@@ -92,7 +92,7 @@ def parse_posts(driver, posts):
 def find_articles(driver):
     body = driver.find_element(By.TAG_NAME, 'body')
     body.send_keys(Keys.HOME)
-    body.send_keys(Keys.PAGEUP)
+    body.send_keys(Keys.PAGE_UP)
     for i in range(3):
         posts = driver.find_elements(By.CSS_SELECTOR, 'article')
         if not posts:
