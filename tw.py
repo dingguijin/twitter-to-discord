@@ -81,4 +81,4 @@ if __name__ == "__main__":
         s = get_page(driver, url)
     except Exception as e:
         print(e)
-        _restart()
+        restart()
