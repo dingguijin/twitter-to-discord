@@ -3,6 +3,9 @@ import json
 import discord
 import asyncio
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # 建立 Redis 连接
 r = redis.Redis(host='localhost', port=6379)
 
@@ -15,7 +18,7 @@ r = redis.Redis(host='localhost', port=6379)
 #d9fae1ea6954e933b3cb45e3421857f754c9465aa399ac93275f2bbbccf60534
 
 # TOKEN
-DISCORD_TOKEN = 'MTA5OTE5ODIxNTY3ODYwMzMxNQ.GWjxuU.9ezlLvVQYzLbfz_Ycbkrbxd1XMrNZo6Q-Swiyc'
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
 intents = discord.Intents(messages=True)
 client = discord.Client(intents=intents)
