@@ -54,7 +54,7 @@ def get_driver_instance():
     return driver
 
 def find_articles(driver):
-    body = driver.find_element(By.TAG, 'body')
+    body = driver.find_element(By.TAG_NAME, 'body')
     for i in range(3):
         body.send_keys(Keys.END)
         time.sleep(5)
