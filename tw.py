@@ -83,7 +83,7 @@ def parse_posts(driver, posts):
         user_id = post.find_element(By.CSS_SELECTOR, _id_css).text
         content = post.find_element(By.CSS_SELECTOR, _content_css).text
         content_id = post.get_attribute("data-testid")
-        print(f"Username: {username.text}")
+        print(f"Username: {username}")
         print(f"User ID: {user_id}")
         print(f"Content: {content}")
         print(f"Content ID: {content_id}")
