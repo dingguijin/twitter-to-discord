@@ -44,14 +44,13 @@ class DiscordClient(discord.Client):
             logging.info("Channel in channels %s" % channel)
 
 
+        channel = None
         for guild in self.guilds:
             logging.info("GUID ---> %s" % guild)
             for channel in guild.text_channels:
                 logging.info("CHANNEL FOR GUID: %s" % str(channel.name))
-        channel_id = "1099196160549326908"
-        channel_id = "1099196160549326908"
-        channel_id = "1099196072460566658"
-        channel = self.get_channel(channel_id)
+                if channel.name == "tweets":
+                    channel = channel
         if not channel:
             logging.error("No channel for %s" % channel_id)
             return
