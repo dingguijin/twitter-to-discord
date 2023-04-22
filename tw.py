@@ -55,19 +55,7 @@ def get_driver_instance():
     driver = webdriver.Chrome(options=options)
     return driver
 
-def find_articles(driver):
-    body = driver.find_element(By.TAG_NAME, 'body')
-    for i in range(3):
-        body.send_keys(Keys.END)
-        time.sleep(1.5)
-    for i in range(3):
-        body.send_keys(Keys.HOME)
-        time.sleep(2.5)
-
-    posts = driver.find_elements(By.CSS_SELECTOR, 'article')
-    if not posts:
-       return None 
-
+def parse_posts(driver, posts):
     _username_css = "a.css-4rbku5.css-18t94o4.css-1dbjc4n.r-1loqt21.r-1wbh5a2.r-dnmrzs.r-1ny4l3l div div span.css-901oao.css-16my406.css-1hf3ou5.r-poiln3.r-bcqeeo.r-qvutc0 span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0"
     _id_css = "div.css-1dbjc4n.r-18u37iz.r-1wbh5a2.r-13hce6t > div.css-1dbjc4n.r-1d09ksm.r-18u37iz.r-1wbh5a2 > div.css-1dbjc4n.r-1wbh5a2.r-dnmrzs > a.r-1ny4l3l > div > span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0"
 
@@ -82,6 +70,15 @@ def find_articles(driver):
         print(f"Content: {content}")
         print(f"Content ID: {content_id}")
 
+def find_articles(driver):
+    body = driver.find_element(By.TAG_NAME, 'body')
+    for i in range(3):
+        posts = driver.find_elements(By.CSS_SELECTOR, 'article')
+        if not posts:
+            continue
+        parse_posts(driver, posts)
+        body.send_keys(Keys.END)
+        time.sleep(1.5)
     return None
 
 def get_page(driver, url):
