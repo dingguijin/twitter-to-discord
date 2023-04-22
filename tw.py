@@ -52,6 +52,24 @@ def get_driver_instance():
     options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
     driver = webdriver.Chrome(options=options)
     return driver
+def find_ariticles(driver):
+    body = driver.find_element_by_tag_name('body')
+    for i in range(3):
+        body.send_keys(Keys.END)
+        time.sleep(5)
+
+    posts = driver.find_elements_by_css_selector('article')
+
+    for post in posts:
+        username = post.find_element_by_css_selector('span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0')
+        user_id = post.find_element_by_css_selector('a.css-4rbku5.css-18t94o4.css-1dbjc4n.r-kemksi.r-wgabs5.r-1loqt21.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-o7ynqc.r-6416eg').get_attribute('href').split('/')[-1]
+        content = post.find_element_by_css_selector('div.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0').text
+        content_id = post.get_attribute("data-testid")
+        print(f"Username: {username.text}")
+        print(f"User ID: {user_id}")
+        print(f"Content: {content}")
+        print(f"Content ID: {content_id}")
+
 
 def get_page(driver, url):
     driver.get(url)
@@ -60,17 +78,12 @@ def get_page(driver, url):
     driver.implicitly_wait(2.0)
     time.sleep(1.0)
     time.sleep(10)
-    while True:
-        frame = driver.find_element(By.CSS_SELECTOR, "#react-root > div > div > div.css-1dbjc4n.r-18u37iz.r-13qz1uu.r-417010 > main > div > div > div > div.css-1dbjc4n.r-14lw9ot.r-jxzhtn.r-1ljd8xs.r-13l2t4g.r-1phboty.r-16y2uox.r-1jgb5lz.r-11wrixw.r-61z16t.r-1ye8kvj.r-13qz1uu.r-184en5c > div > div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-13qz1uu > div > section > div > div > div:nth-child(1) > div > div > div > div > span")
-        if not frame:
-            up_down_with_se(driver)
-            time.sleep(5)
-            continue
-        time.sleep(1)
-        frame.click()
-        time.sleep(abs(random.gauss(10.0, 8.0)))
-        up_down_with_se(driver)
-
+        #frame = driver.find_element(By.CSS_SELECTOR, "#react-root > div > div > div.css-1dbjc4n.r-18u37iz.r-13qz1uu.r-417010 > main > div > div > div > div.css-1dbjc4n.r-14lw9ot.r-jxzhtn.r-1ljd8xs.r-13l2t4g.r-1phboty.r-16y2uox.r-1jgb5lz.r-11wrixw.r-61z16t.r-1ye8kvj.r-13qz1uu.r-184en5c > div > div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-13qz1uu > div > section > div > div > div:nth-child(1) > div > div > div > div > span")
+    articles = find_articles(driver)
+    if not articles:
+        raise Exception("No Articles")
+    time.sleep(abs(random.gauss(10.0, 8.0)))
+    rasise Exception("Restart")
     return
 
 
