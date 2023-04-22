@@ -17,8 +17,9 @@ r = redis.Redis(host='localhost', port=6379)
 # TOKEN
 DISCORD_TOKEN = 'MTA5OTE5ODIxNTY3ODYwMzMxNQ.GudgwK.EyJfRZWNqZL71m7MNP-EzO2OQ4k-VnPjyncz88'
 
-# 建立 Discord bot 连接
-client = discord.Client()
+intents = discord.Intents(messages=True)
+client = discord.Client(intents=intents)
+
 
 # channel_id
 channel_id = "1099196160549326908"
