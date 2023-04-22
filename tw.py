@@ -52,24 +52,28 @@ def get_driver_instance():
     options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
     driver = webdriver.Chrome(options=options)
     return driver
-def find_ariticles(driver):
+
+def find_articles(driver):
     body = driver.find_element_by_tag_name('body')
     for i in range(3):
         body.send_keys(Keys.END)
         time.sleep(5)
 
-    posts = driver.find_elements_by_css_selector('article')
+    posts = driver.find_elements(By.CSS_SELECTOR, 'article')
+    if not posts:
+       return None 
 
     for post in posts:
-        username = post.find_element_by_css_selector('span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0')
-        user_id = post.find_element_by_css_selector('a.css-4rbku5.css-18t94o4.css-1dbjc4n.r-kemksi.r-wgabs5.r-1loqt21.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-o7ynqc.r-6416eg').get_attribute('href').split('/')[-1]
-        content = post.find_element_by_css_selector('div.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0').text
+        username = post.find_element(By.CSS_SELECTOR, 'span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0')
+        user_id = post.find_element(By.CSS_SELECTOR, 'a.css-4rbku5.css-18t94o4.css-1dbjc4n.r-kemksi.r-wgabs5.r-1loqt21.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-o7ynqc.r-6416eg').get_attribute('href').split('/')[-1]
+        content = post.find_element(By.CSS_SELECTOR, 'div.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0').text
         content_id = post.get_attribute("data-testid")
         print(f"Username: {username.text}")
         print(f"User ID: {user_id}")
         print(f"Content: {content}")
         print(f"Content ID: {content_id}")
 
+    return None
 
 def get_page(driver, url):
     driver.get(url)
