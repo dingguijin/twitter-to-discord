@@ -44,6 +44,8 @@ class DiscordClient(discord.Client):
             logging.info("Channel in channels %s" % channel)
 
         channel_id = "1099196160549326908"
+        channel_id = "1099196160549326908"
+        channel_id = "1099196072460566658"
         channel = self.get_channel(channel_id)
         if not channel:
             logging.error("No channel for %s" % channel_id)
