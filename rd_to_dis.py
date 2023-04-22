@@ -43,6 +43,11 @@ class DiscordClient(discord.Client):
         for channel in channels:
             logging.info("Channel in channels %s" % channel)
 
+
+        for guild in client.guilds:
+            logging.info("GUID ---> %s" % guild)
+            for channel in guild.text_channels:
+                logging.info("CHANNEL FOR GUID: %s" % str(channel.name))
         channel_id = "1099196160549326908"
         channel_id = "1099196160549326908"
         channel_id = "1099196072460566658"
