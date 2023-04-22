@@ -39,6 +39,7 @@ class DiscordClient(discord.Client):
             logging.error("Discord client not ready")
             return
         channels = self.get_all_channels()
+        logging.info("All channels %s" % channels)
         for channel in channels:
             logging.info("Channel in channels %s" % channel)
 
