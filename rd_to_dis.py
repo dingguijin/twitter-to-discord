@@ -44,7 +44,7 @@ class DiscordClient(discord.Client):
             logging.info("Channel in channels %s" % channel)
 
 
-        for guild in client.guilds:
+        for guild in self.guilds:
             logging.info("GUID ---> %s" % guild)
             for channel in guild.text_channels:
                 logging.info("CHANNEL FOR GUID: %s" % str(channel.name))
