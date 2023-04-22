@@ -74,6 +74,6 @@ class DiscordClient(discord.Client):
 
 logging.basicConfig(level=logging.INFO)
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
-intents = discord.Intents(messages=True)
+intents = discord.Intents.all()
 client = DiscordClient(intents=intents)
 client.run(DISCORD_TOKEN)
