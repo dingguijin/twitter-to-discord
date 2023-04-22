@@ -87,7 +87,7 @@ def parse_posts(driver, posts):
         print(f"User ID: {user_id}")
         print(f"Content: {content}")
         print(f"Content ID: {content_id}")
-        save_tweet_to_queue(username, user_id, content)
+        save_tweet_to_queue(str(username), str(user_id), str(content))
 
 def find_articles(driver):
     body = driver.find_element(By.TAG_NAME, 'body')
