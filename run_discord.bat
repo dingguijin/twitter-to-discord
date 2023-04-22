@@ -2,7 +2,7 @@
 
 :loop
   rem 运行你想要运行的程序，这里假设是my_program.exe
-  python discord.py
+  python rd_to_dis.py
   
   rem 生成一个1-10之间的随机数
   set /a random_num=%random% %% 10 + 1
