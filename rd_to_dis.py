@@ -28,6 +28,9 @@ client = discord.Client(intents=intents)
 # channel_id
 channel_id = "1099196160549326908"
 async def read_queue():
+    channels = client.get_all_channels()
+    print(channels)
+
     while True:
         # get latest tweet from queue and delete user hash key
         tweet_json = r.rpop('tweet_queue')
@@ -35,6 +38,7 @@ async def read_queue():
             tweet_dict = json.loads(tweet_json)
             for user_hash, tweet in tweet_dict.items():
                 # send tweet to discord server
+                
                 channel = client.get_channel(channel_id)
                 await channel.send(f"User {tweet['username']} said: {tweet['content']}")
                 # remove hash key from Redis
