@@ -83,7 +83,7 @@ def get_page(driver, url):
     if not articles:
         raise Exception("No Articles")
     time.sleep(abs(random.gauss(10.0, 8.0)))
-    rasise Exception("Restart")
+    raise Exception("Restart")
     return
 
 
