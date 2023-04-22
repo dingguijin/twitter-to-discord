@@ -18,44 +18,45 @@ r = redis.Redis(host='localhost', port=6379)
 # PUBLIC
 #d9fae1ea6954e933b3cb45e3421857f754c9465aa399ac93275f2bbbccf60534
 
-# TOKEN
-DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+class DiscordClient(discord.Client):
+    async def on_ready(self):
+        logging.info("Logged on as %s" % self.user)
+        self.every_ten_seconds.start()
 
-intents = discord.Intents(messages=True)
-client = discord.Client(intents=intents)
+    async def on_message(self, message):
+        # don't respond to ourselves
+        if self.user == message.author:
+            return
 
+        if message.content == 'ping':
+            await message.channel.send('pong')
 
-# channel_id
-channel_id = "1099196160549326908"
-async def read_queue():
-    channels = client.get_all_channels()
-    print(channels)
+    @tasks.loop(seconds=3)
+    async def every_ten_seconds(self):
+        if not self.is_ready():
+            logging.error("Discord client not ready")
+            return
+        channel_id = "1099196160549326908"
+        channels = self.get_all_channels()
 
-    while True:
-        # get latest tweet from queue and delete user hash key
-        tweet_json = r.rpop('tweet_queue')
-        if tweet_json is not None:
+        channel = self.get_channel(channel_id)
+        while True:
+            # get latest tweet from queue and delete user hash key
+            tweet_json = r.rpop('tweet_queue')
+            if not tweet_json:
+                break
+
             tweet_dict = json.loads(tweet_json)
             for user_hash, tweet in tweet_dict.items():
-                # send tweet to discord server
-                
-                channel = client.get_channel(channel_id)
                 await channel.send(f"User {tweet['username']} said: {tweet['content']}")
                 # remove hash key from Redis
                 r.delete(user_hash)
                 print(f"{user_hash} deleted from Redis")
-        else:
-            print("No tweets in the queue.")
-            break
-        
-        # wait for a while before trying again
-        await asyncio.sleep(5)
+            
+            # wait for a while before trying again
+            await asyncio.sleep(5)
 
-@client.event
-async def on_ready():
-    print(f'Logged in as {client.user} (ID: {client.user.id})')
-    # start reading the tweet queue
-    await read_queue()
-
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+intents = discord.Intents(messages=True)
+client = DiscordClient(intents=intents)
 client.run(DISCORD_TOKEN)
-
