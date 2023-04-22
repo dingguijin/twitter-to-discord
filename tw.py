@@ -90,20 +90,12 @@ def get_page(driver, url):
     time.sleep(10)
         #frame = driver.find_element(By.CSS_SELECTOR, "#react-root > div > div > div.css-1dbjc4n.r-18u37iz.r-13qz1uu.r-417010 > main > div > div > div > div.css-1dbjc4n.r-14lw9ot.r-jxzhtn.r-1ljd8xs.r-13l2t4g.r-1phboty.r-16y2uox.r-1jgb5lz.r-11wrixw.r-61z16t.r-1ye8kvj.r-13qz1uu.r-184en5c > div > div.css-1dbjc4n.r-1jgb5lz.r-1ye8kvj.r-13qz1uu > div > section > div > div > div:nth-child(1) > div > div > div > div > span")
     articles = find_articles(driver)
-    if not articles:
-        raise Exception("No Articles")
-    time.sleep(abs(random.gauss(10.0, 8.0)))
-    raise Exception("Restart")
     return
 
 
 if __name__ == "__main__":
     driver = get_driver_instance()
     url = "https://twitter.com/home"
-    try:
-        s = get_page(driver, url)
-    except Exception as e:
-        print(e)
-        _t = random.gauss(8.0, 3.5)
-        time.sleep(abs(_t));
-        restart()
+
+    while True:
+        get_page(driver, url)
