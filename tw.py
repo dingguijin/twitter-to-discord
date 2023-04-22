@@ -115,6 +115,4 @@ def get_page(driver, url):
 if __name__ == "__main__":
     driver = get_driver_instance()
     url = "https://twitter.com/home"
-
-    while True:
-        get_page(driver, url)
+    get_page(driver, url)
