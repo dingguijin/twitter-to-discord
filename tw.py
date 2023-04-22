@@ -65,10 +65,14 @@ def find_articles(driver):
     if not posts:
        return None 
 
+    _username_css = "a.css-4rbku5.css-18t94o4.css-1dbjc4n.r-1loqt21.r-1wbh5a2.r-dnmrzs.r-1ny4l3l > div > div > span.css-901oao.css-16my406.css-1hf3ou5.r-poiln3.r-bcqeeo.r-qvutc0 > span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0"
+    _id_css = "a.css-4rbku5.css-18t94o4.css-1dbjc4n.r-1loqt21.r-1wbh5a2.r-dnmrzs.r-1ny4l3l > div.css-901oao.css-1hf3ou5.r-14j79pv.r-18u37iz.r-1qd0xha.r-1wvb978.r-a023e6.r-16dba41i.r-rjixqe.r-bcqeeo.r-qvutc0 > span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0"
+
+    _content_css = "div[data-testid=\"tweetText\"] > span"
     for post in posts:
         username = post.find_element(By.CSS_SELECTOR, 'span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0')
-        user_id = post.find_element(By.CSS_SELECTOR, 'a.css-4rbku5.css-18t94o4.css-1dbjc4n.r-kemksi.r-wgabs5.r-1loqt21.r-1pi2tsx.r-1d2f490.r-u8s1d.r-zchlnj.r-ipm5af.r-o7ynqc.r-6416eg').get_attribute('href').split('/')[-1]
-        content = post.find_element(By.CSS_SELECTOR, 'div.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0').text
+        user_id = post.find_element(By.CSS_SELECTOR, _id_css).text
+        content = post.find_element(By.CSS_SELECTOR, _content_css).text
         content_id = post.get_attribute("data-testid")
         print(f"Username: {username.text}")
         print(f"User ID: {user_id}")
