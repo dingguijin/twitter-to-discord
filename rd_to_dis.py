@@ -4,6 +4,7 @@ import discord
 from discord.ext import tasks
 import asyncio
 import os
+import logging
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -57,6 +58,7 @@ class DiscordClient(discord.Client):
             # wait for a while before trying again
             await asyncio.sleep(5)
 
+logging.basicConfig(level=logging.INFO)
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 intents = discord.Intents(messages=True)
 client = DiscordClient(intents=intents)
