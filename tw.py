@@ -12,6 +12,24 @@ import time
 import random
 import pyautogui as ag
 
+import redis
+import hashlib
+import json
+
+# 建立 Redis 连接
+client = redis.Redis(host='localhost', port=6379)
+
+def save_tweet_to_queue(username, user_id, content):
+    user_hash = hashlib.sha256(f"{username}{user_id}{content}".encode()).hexdigest()
+    key_exists = client.exists(user_hash)
+    if not key_exists:
+        client.set(user_hash, '')
+        user_dict = {'username': username, 'user_id': user_id, 'content': content}
+        client.lpush('tweet_queue', json.dumps({user_hash: user_dict}))
+        print(f"New user {username} created with tweet: {content}")
+
+#save_tweet_to_queue("John", "123456", "Hello World!")
+
 
 def restart():
     os.execv(sys.executable, ['python'] + sys.argv)
@@ -69,6 +87,7 @@ def parse_posts(driver, posts):
         print(f"User ID: {user_id}")
         print(f"Content: {content}")
         print(f"Content ID: {content_id}")
+        save_tweet_to_queue(username, user_id, content)
 
 def find_articles(driver):
     body = driver.find_element(By.TAG_NAME, 'body')
