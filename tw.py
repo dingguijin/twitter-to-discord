@@ -79,7 +79,7 @@ def parse_posts(driver, posts):
 
     _content_css = "div[data-testid=\"tweetText\"] > span"
     for post in posts:
-        username = post.find_element(By.CSS_SELECTOR, 'span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0')
+        username = post.find_element(By.CSS_SELECTOR, _username_css).text
         user_id = post.find_element(By.CSS_SELECTOR, _id_css).text
         content = post.find_element(By.CSS_SELECTOR, _content_css).text
         content_id = post.get_attribute("data-testid")
