@@ -65,8 +65,8 @@ def find_articles(driver):
     if not posts:
        return None 
 
-    _username_css = "a.css-4rbku5.css-18t94o4.css-1dbjc4n.r-1loqt21.r-1wbh5a2.r-dnmrzs.r-1ny4l3l > div > div > span.css-901oao.css-16my406.css-1hf3ou5.r-poiln3.r-bcqeeo.r-qvutc0 > span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0"
-    _id_css = "a.css-4rbku5.css-18t94o4.css-1dbjc4n.r-1loqt21.r-1wbh5a2.r-dnmrzs.r-1ny4l3l > div.css-901oao.css-1hf3ou5.r-14j79pv.r-18u37iz.r-1qd0xha.r-1wvb978.r-a023e6.r-16dba41i.r-rjixqe.r-bcqeeo.r-qvutc0 > span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0"
+    _username_css = "a.css-4rbku5.css-18t94o4.css-1dbjc4n.r-1loqt21.r-1wbh5a2.r-dnmrzs.r-1ny4l3l div div span.css-901oao.css-16my406.css-1hf3ou5.r-poiln3.r-bcqeeo.r-qvutc0 span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0"
+    _id_css = "div.css-1dbjc4n.r-18u37iz.r-1wbh5a2.r-13hce6t > div.css-1dbjc4n.r-1d09ksm.r-18u37iz.r-1wbh5a2 > div.css-1dbjc4n.r-1wbh5a2.r-dnmrzs > a.r-1ny4l3l > div > span.css-901oao.css-16my406.r-poiln3.r-bcqeeo.r-qvutc0"
 
     _content_css = "div[data-testid=\"tweetText\"] > span"
     for post in posts:
