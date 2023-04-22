@@ -59,7 +59,10 @@ def find_articles(driver):
     body = driver.find_element(By.TAG_NAME, 'body')
     for i in range(3):
         body.send_keys(Keys.END)
-        time.sleep(5)
+        time.sleep(1.5)
+    for i in range(3):
+        body.send_keys(Keys.HOME)
+        time.sleep(2.5)
 
     posts = driver.find_elements(By.CSS_SELECTOR, 'article')
     if not posts:
