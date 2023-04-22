@@ -38,10 +38,16 @@ class DiscordClient(discord.Client):
         if not self.is_ready():
             logging.error("Discord client not ready")
             return
-        channel_id = "1099196160549326908"
         channels = self.get_all_channels()
+        for channel in channels:
+            logging.info("Channel in channels %s" % channel)
 
+        channel_id = "1099196160549326908"
         channel = self.get_channel(channel_id)
+        if not channel:
+            logging.error("No channel for %s" % channel_id)
+            return
+
         while True:
             # get latest tweet from queue and delete user hash key
             tweet_json = r.rpop('tweet_queue')
