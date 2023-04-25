@@ -1,9 +1,14 @@
 import pyautogui
 import time
+import datetime
 
 def monitor_chrome():
     while True:
         titles = pyautogui.getAllTitles()
+        
+        print(datetime.datetime.now())
+        print(titles)
+
         for title in titles:
             if "Chrome" in title:
                 window = pyautogui.getWindowsWithTitle(title)[0]
